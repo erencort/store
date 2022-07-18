@@ -4,6 +4,7 @@ import Product from "./ProductCard";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useNavigate } from "react-router-dom";
 import { SimpleGrid } from "@chakra-ui/react";
+import UserBar from "./UserBar";
 
 function Products() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function Products() {
 
   return (
     <div>
+      <UserBar />
       <SimpleGrid minChildWidth="350px" spacing="40px">
         {products.map((item) => (
           <Product

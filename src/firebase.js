@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
 import toast from "react-hot-toast";
 import {
@@ -53,6 +54,15 @@ export const signIn = async (email, password) => {
 
 export const logOut = async () => {
   await signOut(auth);
+};
+
+export const profileUpdate = async (data) => {
+  try {
+    await updateProfile(auth.currentUser, data);
+    toast.success("Profile updated");
+  } catch (error) {
+    toast.error(error.message);
+  }
 };
 
 onAuthStateChanged(auth, (user) => {

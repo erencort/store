@@ -1,8 +1,10 @@
 import React from "react";
 import { Box, Image, Flex, Button, Spacer } from "@chakra-ui/react/";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Product({ title, img, price, desc, category, id }) {
+  const user = useSelector((state) => state.auth.user);
   return (
     <Box
       maxW="sm"
@@ -45,7 +47,9 @@ function Product({ title, img, price, desc, category, id }) {
           </Box>
         </Box>
         <Flex mt="5">
-          <Button colorScheme="blue">Add to cart</Button>
+          <Button disabled={!user} colorScheme="blue">
+            Add to cart
+          </Button>
           <Spacer />
           <Link to={`/products/${id}`}>
             <Button colorScheme="red">Details</Button>

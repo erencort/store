@@ -57,6 +57,10 @@ function Login() {
             <Link to={"/register"}>
               <Button colorScheme="red">Create an account</Button>
             </Link>
+            <Spacer />
+            <Link to="/">
+              <Button>Back to homepage</Button>
+            </Link>
           </Flex>
         </FormControl>
       </Box>
