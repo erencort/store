@@ -7,7 +7,7 @@ function ProductDetail() {
   const { itemId } = useParams();
 
   const allItems = useSelector((state) => state.product.items);
-  const individualItem = allItems.filter((item) => itemId === item.id);
+  const individualItem = allItems.filter((item) => itemId == item.id);
 
   return (
     <Box
