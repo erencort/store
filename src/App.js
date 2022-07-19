@@ -5,8 +5,6 @@ import Home from "./components/Home";
 import Header from "./components/Header";
 import Products from "./components/Products";
 import ProductDetail from "./components/ProductDetail";
-import { useSelector } from "react-redux";
-import ProfileUpdate from "./components/ProfileUpdate";
 
 function App() {
   return (

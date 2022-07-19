@@ -1,13 +1,5 @@
 import { useState } from "react";
-import {
-  FormControl,
-  Input,
-  Button,
-  Box,
-  Flex,
-  Spacer,
-  Text,
-} from "@chakra-ui/react";
+import { FormControl, Input, Button, Box, Flex, Text } from "@chakra-ui/react";
 import { profileUpdate } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";

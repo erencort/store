@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Text } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../firebase";
@@ -19,15 +19,20 @@ function UserBar() {
   return (
     <Box my="5" borderBottom="1px">
       {user ? (
-        <Box>
-          <Box>Welcome {user.email} !</Box>
-          <Button onClick={logoutHandle}>Logout</Button>
+        <Box ml="5">
+          <Box>Welcome!</Box>
+          <Button colorScheme="red" my="5" onClick={logoutHandle}>
+            Logout
+          </Button>
         </Box>
       ) : (
-        <Box>
-          <Link to="/   login">
-            <Button colorScheme="blue">Login</Button>
+        <Box ml="5">
+          <Link to="/login">
+            <Button my="5" colorScheme="blue">
+              Login
+            </Button>
           </Link>
+          <Text>You have to login for shopping!</Text>
         </Box>
       )}
     </Box>

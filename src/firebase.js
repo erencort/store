@@ -12,7 +12,6 @@ import toast from "react-hot-toast";
 import {
   logout as logoutHandle,
   login as loginHandle,
-  login,
 } from "./redux/authSlice";
 import store from "./redux/store";
 

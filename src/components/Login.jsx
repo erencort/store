@@ -3,7 +3,6 @@ import { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { signIn } from "../firebase";
 import { useDispatch } from "react-redux/es/exports";
-import { login as loginHandle } from "../redux/authSlice";
 import {
   FormControl,
   Input,
