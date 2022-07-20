@@ -8,6 +8,7 @@ import {
   onAuthStateChanged,
   updateProfile,
 } from "firebase/auth";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
 import {
   logout as logoutHandle,
@@ -28,6 +29,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+const db = getFirestore(app);
 
 export const register = async (email, password) => {
   try {
@@ -78,3 +80,13 @@ onAuthStateChanged(auth, (user) => {
     store.dispatch(logoutHandle());
   }
 });
+
+export const addCart = async (data) => {
+  try {
+    const result = await addDoc(collection(db, "cart"), data);
+    toast.success("added to cart");
+    console.log(result);
+  } catch (error) {
+    toast.error(error.message);
+  }
+};

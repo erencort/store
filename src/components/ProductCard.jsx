@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Image, Flex, Button, Spacer } from "@chakra-ui/react/";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addCart } from "../firebase";
+import { fetchProducts } from "../redux/productSlice";
 
 function Product({ title, img, price, desc, category, id }) {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const allItems = useSelector((state) => state.product.productItems);
+
+  const handleAddCart = async () => {
+    await addCart({
+      uid: user.userId,
+      productName: title,
+    });
+  };
+
   return (
     <Box
       maxW="sm"
@@ -47,7 +59,7 @@ function Product({ title, img, price, desc, category, id }) {
           </Box>
         </Box>
         <Flex mt="5">
-          <Button disabled={!user} colorScheme="blue">
+          <Button onClick={handleAddCart} disabled={!user} colorScheme="blue">
             Add to cart
           </Button>
           <Spacer />
