@@ -6,7 +6,7 @@ import { Box, Image, Text, Spacer, Button, Flex } from "@chakra-ui/react";
 function ProductDetail() {
   const { itemId } = useParams();
 
-  const allItems = useSelector((state) => state.product.items);
+  const allItems = useSelector((state) => state.product.productItems);
   const individualItem = allItems.filter((item) => itemId == item.id);
 
   return (
