@@ -82,11 +82,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 export const addCart = async (data) => {
-  try {
-    const result = await addDoc(collection(db, "cart"), data);
-    toast.success("added to cart");
-    console.log(result);
-  } catch (error) {
-    toast.error(error.message);
-  }
+  const result = await addDoc(collection(db, "cart"), data);
+  toast.success("added to cart");
+  console.log(result, result.id);
 };

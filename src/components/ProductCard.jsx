@@ -3,12 +3,9 @@ import { Box, Image, Flex, Button, Spacer } from "@chakra-ui/react/";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart } from "../firebase";
-import { fetchProducts } from "../redux/productSlice";
 
 function Product({ title, img, price, desc, category, id }) {
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const allItems = useSelector((state) => state.product.productItems);
 
   const handleAddCart = async () => {
     await addCart({
