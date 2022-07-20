@@ -7,6 +7,7 @@ import { logout as handleLogout } from "../redux/authSlice";
 
 function UserBar() {
   const user = useSelector((state) => state.auth.user);
+  const cart = useSelector((state) => state.product.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,6 +25,14 @@ function UserBar() {
           <Button colorScheme="red" my="5" onClick={logoutHandle}>
             Logout
           </Button>
+          <Link to="/cart">
+            <Button mx={5} colorScheme="blue">
+              Cart ({cart.length})
+            </Button>
+          </Link>
+          <Link to="/products">
+            <Button colorScheme="gray">Products</Button>
+          </Link>
         </Box>
       ) : (
         <Box ml="5">

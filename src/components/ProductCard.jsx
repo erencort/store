@@ -11,6 +11,8 @@ function Product({ title, img, price, desc, category, id }) {
     await addCart({
       uid: user.userId,
       productName: title,
+      count: 1,
+      img,
     });
   };
 

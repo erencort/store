@@ -28,8 +28,16 @@ const productSlice = createSlice({
     categories: [],
     categoryStatus: "",
     categoryError: null,
+    cart: [],
   },
-  reducers: {},
+  reducers: {
+    setCart: (state, action) => {
+      state.cart = action.payload;
+    },
+    appendCart: (state, action) => {
+      state.cart = [...state.cart, action.payload];
+    },
+  },
   extraReducers: {
     [fetchProducts.pending]: (state, action) => {
       state.productStatus = "loading";
@@ -59,4 +67,4 @@ const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
-export const { filterProducts } = productSlice.actions;
+export const { setCart, appendCart } = productSlice.actions;

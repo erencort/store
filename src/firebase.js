@@ -8,12 +8,23 @@ import {
   onAuthStateChanged,
   updateProfile,
 } from "firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  where,
+  onSnapshot,
+  updateDoc,
+  doc,
+  increment,
+} from "firebase/firestore";
 import toast from "react-hot-toast";
 import {
   logout as logoutHandle,
   login as loginHandle,
 } from "./redux/authSlice";
+import { setCart } from "./redux/productSlice";
 import store from "./redux/store";
 
 // Your web app's Firebase configuration
@@ -82,7 +93,20 @@ onAuthStateChanged(auth, (user) => {
 });
 
 export const addCart = async (data) => {
-  const result = await addDoc(collection(db, "cart"), data);
-  toast.success("added to cart");
-  console.log(result, result.id);
+  try {
+    const result = await addDoc(collection(db, "cart"), data);
+    toast.success("Added to cart");
+  } catch (error) {
+    toast.error(error.message);
+  }
 };
+
+onSnapshot(collection(db, "cart"), (doc) => {
+  store.dispatch(
+    setCart(
+      doc.docs.reduce((products, product) => [...products, product.data()], [])
+    )
+  );
+
+  //store.dispatch(setCart(doc.docs))
+});
