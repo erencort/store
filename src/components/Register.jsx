@@ -21,12 +21,11 @@ function Register() {
     e.preventDefault();
     const user = await register(email, password);
     console.log(user);
-    user && navigate("/");
+    user && navigate("/products");
   };
 
   return (
     <Box>
-      <Toaster />
       <Box w="30%" mx="auto" mt="10">
         <Text fontSize="2xl" mb="5">
           Register

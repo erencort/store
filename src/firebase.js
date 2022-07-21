@@ -49,6 +49,7 @@ export const register = async (email, password) => {
       email,
       password
     );
+    toast.success("Your account created.");
     return user;
   } catch (error) {
     toast.error(error.message);
@@ -87,6 +88,23 @@ onAuthStateChanged(auth, (user) => {
         displayName: user.providerData[0].displayName,
       })
     );
+
+    onSnapshot(
+      query(collection(db, "cart"), where("uid", "==", auth.currentUser.uid)),
+      (doc) => {
+        store.dispatch(
+          setCart(
+            doc.docs.reduce(
+              (products, product) => [
+                ...products,
+                { ...product.data(), id: product.id },
+              ],
+              []
+            )
+          )
+        );
+      }
+    );
   } else {
     store.dispatch(logoutHandle());
   }
@@ -100,13 +118,3 @@ export const addCart = async (data) => {
     toast.error(error.message);
   }
 };
-
-onSnapshot(collection(db, "cart"), (doc) => {
-  store.dispatch(
-    setCart(
-      doc.docs.reduce((products, product) => [...products, product.data()], [])
-    )
-  );
-
-  //store.dispatch(setCart(doc.docs))
-});

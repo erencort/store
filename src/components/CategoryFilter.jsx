@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@chakra-ui/react";
 import { fetchCategories, fetchProducts } from "../redux/productSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
 
 function CategoryFilter() {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ function CategoryFilter() {
       </Button>
       {categories.map((item) => (
         <Button
+          key={nanoid()}
           onClick={() => filterHandle(`/category/${item}`)}
           px={4}
           py={1}

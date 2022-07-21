@@ -11,6 +11,7 @@ function Cart() {
       <SimpleGrid minChildWidth="170px" spacing="40px">
         {cart.map((item) => (
           <Box
+            key={item.id}
             maxW="sm"
             borderWidth="1px"
             borderRadius="lg"
