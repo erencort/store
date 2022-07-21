@@ -15,7 +15,7 @@ import {
   query,
   where,
   onSnapshot,
-  updateDoc,
+  deleteDoc,
   doc,
   increment,
 } from "firebase/firestore";
@@ -66,7 +66,12 @@ export const signIn = async (email, password) => {
 };
 
 export const logOut = async () => {
-  await signOut(auth);
+  try {
+    await signOut(auth);
+    return true;
+  } catch (error) {
+    toast.error(error.message);
+  }
 };
 
 export const profileUpdate = async (data) => {
@@ -114,6 +119,15 @@ export const addCart = async (data) => {
   try {
     const result = await addDoc(collection(db, "cart"), data);
     toast.success("Added to cart");
+  } catch (error) {
+    toast.error(error.message);
+  }
+};
+
+export const deleteCart = async (data) => {
+  try {
+    await deleteDoc(doc(db, "cart", data));
+    return true;
   } catch (error) {
     toast.error(error.message);
   }
