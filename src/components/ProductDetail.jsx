@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { Box, Image, Text, Spacer, Button, Flex } from "@chakra-ui/react";
 import { fetchProducts } from "../redux/productSlice";
+import { addCart } from "../firebase";
 
 function ProductDetail() {
   const { itemId } = useParams();
@@ -10,12 +11,22 @@ function ProductDetail() {
 
   const allItems = useSelector((state) => state.product.productItems);
   const individualItem = allItems.filter((item) => itemId == item.id);
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     if (individualItem.length == 0) {
       dispatch(fetchProducts("/"));
     }
   }, []);
+
+  const handleAddCart = async () => {
+    await addCart({
+      uid: user.userId,
+      productName: individualItem[0]?.title,
+      count: 1,
+      img: individualItem[0]?.image,
+    });
+  };
 
   return (
     <Box
@@ -47,7 +58,9 @@ function ProductDetail() {
             <Spacer />
             <Text fontSize="2xl">${individualItem[0]?.price}</Text>
             <Spacer />
-            <Button colorScheme="blue">Add to cart</Button>
+            <Button colorScheme="blue" onClick={handleAddCart}>
+              Add to cart
+            </Button>
           </Flex>
         </Box>
       </Box>
