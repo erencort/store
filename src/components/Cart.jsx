@@ -1,8 +1,17 @@
-import { Box, Image, SimpleGrid, Text, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  SimpleGrid,
+  Text,
+  Button,
+  Spacer,
+  Flex,
+} from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
 import UserBar from "./UserBar";
 import { deleteCart } from "../firebase";
+import { Link } from "react-router-dom";
 
 function Cart() {
   const cart = useSelector((state) => state.product.cart);
@@ -36,7 +45,7 @@ function Cart() {
             >
               {item.productName}
             </Box>
-            <Box>
+            <Flex>
               <Button
                 mt={5}
                 mb={2}
@@ -45,7 +54,13 @@ function Cart() {
               >
                 Delete
               </Button>
-            </Box>
+              <Spacer />
+              <Link to={`/products/${item.productId}`}>
+                <Button mt={5} mb={2}>
+                  Details
+                </Button>
+              </Link>
+            </Flex>
           </Box>
         ))}
       </SimpleGrid>
