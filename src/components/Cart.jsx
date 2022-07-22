@@ -55,6 +55,10 @@ function Cart() {
                 Delete
               </Button>
               <Spacer />
+              <Text mt={5} mb={2}>
+                {item.count}
+              </Text>
+              <Spacer />
               <Link to={`/products/${item.productId}`}>
                 <Button mt={5} mb={2}>
                   Details

@@ -18,8 +18,10 @@ import {
   deleteDoc,
   doc,
   increment,
+  updateDoc,
 } from "firebase/firestore";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 import {
   logout as logoutHandle,
   login as loginHandle,
@@ -116,11 +118,23 @@ onAuthStateChanged(auth, (user) => {
 });
 
 export const addCart = async (data) => {
-  try {
+  /*try {
     const result = await addDoc(collection(db, "cart"), data);
     toast.success("Added to cart");
   } catch (error) {
     toast.error(error.message);
+  }*/
+
+  const cart = store.getState().product.cart;
+  const isInCart = cart.some((item) => item.productName == data.productName);
+  if (isInCart) {
+    const item = cart.find((item) => item.productName == data.productName);
+    const ref = doc(db, "cart", item.id);
+    await updateDoc(ref, {
+      count: item.count + 1,
+    });
+  } else {
+    await addDoc(collection(db, "cart"), data);
   }
 };
 
