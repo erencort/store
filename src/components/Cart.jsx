@@ -12,18 +12,30 @@ import { useSelector } from "react-redux";
 import UserBar from "./UserBar";
 import { deleteCart } from "../firebase";
 import { Link } from "react-router-dom";
+import { addCart } from "../firebase";
 
 function Cart() {
   const cart = useSelector((state) => state.product.cart);
+  const user = useSelector((state) => state.auth.user);
 
   const deleteHandle = async (id) => {
     await deleteCart(id);
   };
 
+  const handleAddCart = async (item) => {
+    await addCart({
+      uid: user.userId,
+      productName: item.productName,
+      count: item.count,
+      img: item.img,
+      productId: item.id,
+    });
+  };
+
   return (
     <div>
       <UserBar />
-      <SimpleGrid minChildWidth="170px" spacing="40px">
+      <SimpleGrid minChildWidth="170px" spacing="40px" mx={5}>
         {cart.map((item) => (
           <Box
             key={item.id}
@@ -45,7 +57,7 @@ function Cart() {
             >
               {item.productName}
             </Box>
-            <Flex>
+            <Flex w="80%" alignItems="center" mx="auto">
               <Button
                 mt={5}
                 mb={2}
@@ -59,11 +71,14 @@ function Cart() {
                 {item.count}
               </Text>
               <Spacer />
-              <Link to={`/products/${item.productId}`}>
-                <Button mt={5} mb={2}>
-                  Details
-                </Button>
-              </Link>
+              <Button
+                onClick={() => handleAddCart(item)}
+                colorScheme="blue"
+                mt={5}
+                mb={2}
+              >
+                Add
+              </Button>
             </Flex>
           </Box>
         ))}
