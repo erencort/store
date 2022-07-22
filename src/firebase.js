@@ -21,7 +21,6 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
 import {
   logout as logoutHandle,
   login as loginHandle,
@@ -125,23 +124,40 @@ export const addCart = async (data) => {
     toast.error(error.message);
   }*/
 
-  const cart = store.getState().product.cart;
-  const isInCart = cart.some((item) => item.productName == data.productName);
-  if (isInCart) {
-    const item = cart.find((item) => item.productName == data.productName);
-    const ref = doc(db, "cart", item.id);
-    await updateDoc(ref, {
-      count: item.count + 1,
-    });
-  } else {
-    await addDoc(collection(db, "cart"), data);
+  try {
+    const cart = store.getState().product.cart;
+    const isInCart = cart.some((item) => item.productName == data.productName);
+    if (isInCart) {
+      const item = cart.find((item) => item.productName == data.productName);
+      const ref = doc(db, "cart", item.id);
+      await updateDoc(ref, {
+        count: item.count + 1,
+      });
+    } else {
+      await addDoc(collection(db, "cart"), data);
+    }
+    toast.success("Added to cart");
+  } catch (error) {
+    toast.error(error.message);
   }
 };
 
 export const deleteCart = async (data) => {
-  try {
+  /*try {
     await deleteDoc(doc(db, "cart", data));
     return true;
+  } catch (error) {
+    toast.error(error.message);
+  }*/
+  try {
+    if (data.count > 1) {
+      const ref = doc(db, "cart", data.id);
+      await updateDoc(ref, {
+        count: data.count - 1,
+      });
+    } else {
+      await deleteDoc(doc(db, "cart", data.id));
+    }
   } catch (error) {
     toast.error(error.message);
   }

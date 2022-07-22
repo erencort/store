@@ -50,7 +50,7 @@ function Cart() {
                 mt={5}
                 mb={2}
                 colorScheme="red"
-                onClick={() => deleteHandle(item.id)}
+                onClick={() => deleteHandle(item)}
               >
                 Delete
               </Button>
