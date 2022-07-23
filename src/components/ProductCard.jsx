@@ -13,7 +13,8 @@ function Product({ title, img, price, desc, category, id }) {
       productName: title,
       count: 1,
       img,
-      productId: id
+      productId: id,
+      price,
     });
   };
 

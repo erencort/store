@@ -13,6 +13,7 @@ import UserBar from "./UserBar";
 import { deleteCart } from "../firebase";
 import { Link } from "react-router-dom";
 import { addCart } from "../firebase";
+import Receipt from "./Receipt";
 
 function Cart() {
   const cart = useSelector((state) => state.product.cart);
@@ -83,6 +84,7 @@ function Cart() {
           </Box>
         ))}
       </SimpleGrid>
+      <Receipt />
     </div>
   );
 }

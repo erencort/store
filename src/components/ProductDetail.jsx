@@ -25,6 +25,7 @@ function ProductDetail() {
       productName: individualItem[0]?.title,
       count: 1,
       img: individualItem[0]?.image,
+      price: individualItem[0]?.price,
     });
   };
 
