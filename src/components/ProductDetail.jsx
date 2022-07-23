@@ -58,7 +58,7 @@ function ProductDetail() {
             <Spacer />
             <Text fontSize="2xl">${individualItem[0]?.price}</Text>
             <Spacer />
-            <Button colorScheme="blue" onClick={handleAddCart}>
+            <Button disabled={!user} colorScheme="blue" onClick={handleAddCart}>
               Add to cart
             </Button>
           </Flex>
