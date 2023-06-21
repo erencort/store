@@ -1,4 +1,4 @@
-# (Live)[https://celadon-chimera-172438.netlify.app/]
+# [Live](https://celadon-chimera-172438.netlify.app/)
 
 # Getting Started with Create React App
 
