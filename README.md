@@ -1,5 +1,14 @@
 # [Live](https://celadon-chimera-172438.netlify.app/)
 
+![image](https://github.com/erencort/store/assets/20832592/48880f36-432e-448f-a5e1-a9cf2c35777d)
+
+![image](https://github.com/erencort/store/assets/20832592/7b268511-4fc5-4cc6-8fe4-05e34fb63c8f)
+
+![image](https://github.com/erencort/store/assets/20832592/2e203718-1c98-4e29-a6bd-87ff4d3522f1)
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
